@@ -1,0 +1,29 @@
+GIT
+
+- git init - inicijalizacija novog repozitorija
+- git config --global user.email - povezivanje lokalnog repozitorija sa git accountom (email je git username) globalno
+
+- .gitignore - file koji git sam napravi ili ga moramo sami slozit, ugl sadrži sve foldere i fileove koje ne želimo da idu u repozitorij - tipa node_modules, dist, itd
+
+FUNKCIJE
+- kad pored filea stoji:
+    - U - untracked - nije jos u stagingu
+    - A - added - dodan u staging
+    - M - modified - promijenjen nakon dodavanja u staging
+- git status - prikazuje stanje svih fileova koje se treba uvest u staging area
+- git add -A - dodaje sve untracked fileove u staging area
+- git commit - tzv, commitanje, spremanje code snapshota i promjena
+- git commit -m "Some message" - dodavanje poruke/opisa promjene
+- git reset --hard HEAD - vraćanje svih fileova na stanje iz zadnjeg commita, HEAD je main branch
+- git log - provjerit log-ove svih prijašnjih commitova, Q za izać iz log-a
+- git reset --hard "commit-id" - vraćanje na stanje commita kojeg želimo, id uzmemo iz log-a
+- git brach - prikaz svih brancheva koje imamo, novi branch se ugl stvara kad se radi neka velika promjena ili neki veliki povratak u prošlo stanje
+- git branch "ime-brancha" - stvaranje novog brancha
+- git checkout "ime-brancha" - prebacivanje na branch
+- git merge "ime-brancha" - spajanje koda trenutnog brancha s kodom "ime-brancha"
+
+STVARANJE NOVOG REPO + PUSHANJE PROMJENA
+1. stvorit novi repo na svom git acc
+2. pushanje local repo-a na git - nakon što se napravi online repo dobije se command line koji se treba upisat da se doda na online repo - ide git remote add origin ... - dodaje se novi remote branch origin sa svojim url-om
+3. git push origin master - pushanje koda na origin, master je branch koji zelimo pushat //////////////////////////////////////
+4. napravit README.md file koji služi za description

@@ -1,0 +1,54 @@
+Planiranje projekta
+
+1. user stories - koje sve funkcionalnosti mozemo implementirati ovisno o tipu korisnika, što sve određeni korisnik želi moći raditi
+pr. kao korisnik želim moći tražiti recepte, mijenjati broj obroka, favoritizirat recepte, kreirat svoje recepte i da se to sve sprema nakon što se ponovno vratim u app
+
+		zahtjevi korisnika					funkcionalnost
+	-traženje recepata					-pretraživanje recepata putem searchbara preko API, prikazivanje rez + pagination, prikaz recepata sa svbim info
+	-mijenjanje broja porcija				-update svih sastojaka ovisno o tome kolko porcija je odabrano
+	-bookmarkanje						-spremanje i prikaz bookmarkova
+	-kreiranje recepata					- mogucnost uploadanja recepata, automatski bookmark, user vidi samo svoje recepte, ne tude
+	-spremanje recepata nakon zatvaranja app		- spremanje bookmaraka sa local storageom, na load stranice procitat saveane bookmarke i displayat ih
+
+-----------------------------------------------------------------------------------------------------------------
+Arihtektura aplikacije
+- arhitektura projekta nam je potrebna radi:
+	1. Strukture - zbog organizacije koda
+	2. Održavanja - projekt nikada nije gotov i treba se odrzavat, tako da uređenom arhitekturom olaksavamo odrzavanje
+	3. Proširenja - olakšavamo buduća proširenja i nove ideje
+
+Postoje razne šprance arhtekture projekata kao mvc, mvp, flix i slicno
+
+Arhitekturu ugl rjesavaju frameworkovi (Reacte, Vue, Svelte)
+
+Svaka arhitektura mora sadrzavati:
+	1. Bussiness logic - kod koji rješava poslovni problem
+	2. State - predstavlja spremanje svih podataka aplikacije koji su u tom trenu u browseru
+			 - ako se nešto promijeni u stateu, onda se to mora promijenit i u UI
+			 - postoje i librariji kao redux koji to rade za nas
+	3. HTTP Library - zaduzen za stvaranje i primanje http requestova
+	4. Application logic - implementacija aplikacije
+						 - handleanje navigacijom i UI eventima
+	5. Presentation logic (UI) - kod koji je zaduzen za vizualni prikaz aplikacije
+							   - prikazuje state applikacije
+
+Za ovaj projekt se koristi MVC arhitektura
+
+MVC (Model-View controller) arhitektura
+
+			|																				 |
+			|- - - ->																		 |
+		WEB |			MODEL					CONTROLLER				VIEW   		- - - - >|  USER
+			|<- - - -																		 |
+			|																				 |
+					BUSSINESS LOGIC			APPLICATION LOGIC		PRESENTATION LOGIC
+						STATE
+					  HTTP LIBRARY
+
+Controller je uglavnom zadužen za implementaciju funckija i modula, gdje od modela traži i šalje zahtjeve za nekim podacima na webu, te view-u onda dostavlja te podatke kako bi ih on mogao prikazat useru
+
+PUBLISER-SUBSCRIBER PATTERN
+Eventi se listenaju u viewu, ali se handleaju u controlleru
+Kod koji reagira je subscriber (controller), a kod koji sluša je publisher (view)
+
+U MVC arhitekturi model i view ne komuniciraju direktno, nego preko controllera
